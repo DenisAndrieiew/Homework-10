@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -44,10 +45,18 @@ public class Exercise {
     public static<T> Stream<T> zip(Stream<T> first, Stream<T> second){
 //        long firstLength = first.count();
 //        long secondLength = second.count();
+List<T> firstList = first.collect(Collectors.toList());
+List<T> secondList = second.collect(Collectors.toList());
+List<T> newList = new LinkedList<>();
+int counter = 0;
+int size = Math.min(firstList.size(), secondList.size());
+while (counter<size) {
+    newList.add(firstList.get(counter));
+    newList.add(secondList.get(counter));
+    counter++;
+}
 
-        Stream<T> zip = Stream.concat(first,second);
-
-        return zip;
+        return newList.stream();
     }
 
     public static void main(String[] args) {
