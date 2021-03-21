@@ -40,8 +40,6 @@ public class Exercise {
         return Stream.iterate(sead, n -> ((n * a + c) % m));
     }
     public static<T> Stream<T> zip(Stream<T> first, Stream<T> second){
-//        long firstLength = first.count();
-//        long secondLength = second.count();
 List<T> firstList = first.collect(Collectors.toList());
 List<T> secondList = second.collect(Collectors.toList());
 List<T> newList = new LinkedList<>();
