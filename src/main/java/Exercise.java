@@ -10,37 +10,34 @@ public class Exercise {
     static String[] TESTING_ARRAY = {"1, 2, 0", "4, 5"};
     static Stream FIRST_TEST_STREAM = Stream.of(2,5,7,9);
     static Stream SECOND_TEST_STREAM= Stream.of(11,44,23,94,75,67,32);
-    static long SEAD = 23456987l;
+    static long SEAD = 23456987L;
 
     public static String ex1(List<String> list) {
-        String toReturn = list.stream()
+        return list.stream()
                 .filter(name -> list.indexOf(name) % 2 == 0)
                 .map(name -> "" + (list.indexOf(name) + 1) + ". " + name)
                 .collect(Collectors.toList()).toString();
-        return toReturn;
     }
 
     public static List<String> ex2(List<String> list) {
-        List<String> toReturn = list.stream()
+        return list.stream()
                 .map(name -> name.toUpperCase())
                 .sorted((nameA, nameB) -> Arrays.compare(nameB.toCharArray(), nameA.toCharArray()))
                 .collect(Collectors.toList());
-        return toReturn;
 
     }
 
     public static String ex3(String[] array) {
         StringBuilder builder = new StringBuilder();
         Arrays.stream(array).flatMap(entry -> Arrays.stream(entry.split(",\\s")))
-                .map(entry -> Integer.valueOf(entry))
+                .map(Integer::valueOf)
                 .sorted()
                 .forEach(x -> builder.append(x).append(", "));
         return builder.substring(0, builder.length() - 2);
     }
 
     public static Stream<Long> ex4(long a, long c, long m, long sead) {
-        Stream<Long> randomStream = Stream.iterate(sead, n -> ((n * a + c) % m));
-        return randomStream;
+        return Stream.iterate(sead, n -> ((n * a + c) % m));
     }
     public static<T> Stream<T> zip(Stream<T> first, Stream<T> second){
 //        long firstLength = first.count();
